@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+
+        <template id="rfq_image" inherit_id="purchase.report_purchasequotation_document">
+
+            <xpath expr="//table[@class='table table-sm']" position="replace">
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th><strong>Description</strong></th>
+                            <th><strong>Image</strong></th>
+                            <th class="text-center"><strong>Expected Date</strong></th>
+                            <th class="text-right"><strong>Qty</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="o.order_line" t-as="order_line">
+                            <td>
+                                <span t-field="order_line.name"/>
+                            </td>
+                            <td>
+                                <img t-attf-src="data:image/*;base64,{{order_line.product_id.image_medium}}"
+                                    style="max-height:50px" />
+
+                                    <!-- <img t-att-src="'data:image/jpeg;base64,%s' % order_line.product_id.image_medium"
+                                    style="max-height:50px" /> -->
+                            </td>
+                            <td class="text-center">
+                                <span t-field="order_line.date_planned"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="order_line.product_qty"/>
+                                <span t-field="order_line.product_uom" groups="uom.group_uom"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </xpath>
+
+        </template>
+
+
+    </data>
+</odoo>
